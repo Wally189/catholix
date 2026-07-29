@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#173f35">
+  <meta name="description" content="Catholix Digital Filofax — a bilingual, offline-first whole-life dashboard.">
+  <title>Catholix Digital Filofax</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/filofax.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="filofax.html" aria-label="Catholix home"><span class="cross">✠</span><span>Catholix</span></a>
+  <div class="top-actions">
+    <button id="onlineState" class="status" type="button" disabled>Offline ready</button>
+    <button id="languageToggle" class="secondary" type="button" aria-label="Cambiar a español">ES</button>
+  </div>
+</header>
+<div class="shell">
+  <nav class="sidebar" aria-label="Primary">
+    <button class="nav-item active" data-page="today">Today</button>
+    <button class="nav-item" data-page="tasks">Tasks</button>
+    <button class="nav-item" data-page="prayer">Prayer</button>
+    <button class="nav-item" data-page="readings">Mass readings</button>
+    <button class="nav-item" data-page="journal">Journal</button>
+    <button class="nav-item" data-page="education">Education</button>
+    <button class="nav-item" data-page="news">News desk</button>
+    <button class="nav-item" data-page="library">Library</button>
+    <button class="nav-item" data-page="home">Home & garden</button>
+    <button class="nav-item" data-page="finance">Finance</button>
+    <button class="nav-item" data-page="commonplace">Commonplace</button>
+    <button class="nav-item" data-page="media">Reading & media</button>
+    <button class="nav-item" data-page="connections">Google tools</button>
+    <button class="nav-item" data-page="settings">Settings</button>
+  </nav>
+  <main id="main" tabindex="-1">
+    <section class="page active" id="page-today">
+      <div class="hero">
+        <p class="eyebrow" data-i18n="todayLabel">Whole-life dashboard</p>
+        <h1 id="greeting">Good evening, Alan</h1>
+        <p id="todayDate"></p>
+      </div>
+      <div class="grid three">
+        <article class="card"><h2 data-i18n="dayAnchor">Day anchor</h2><p data-i18n="anchorText">Pray, review commitments, choose enough, and close the day gently.</p></article>
+        <article class="card"><h2 data-i18n="nextPrayer">Next prayer</h2><p id="nextPrayerText">Night Prayer</p><button class="link-button" data-go="prayer" data-i18n="openPrayer">Open prayer page</button></article>
+        <article class="card"><h2 data-i18n="quickCapture">Quick capture</h2><textarea id="quickCapture" rows="4" data-i18n-placeholder="capturePlaceholder" placeholder="Write something to sort later…"></textarea><button id="saveCapture" data-i18n="save">Save</button></article>
+      </div>
+      <div class="grid two">
+        <article class="card"><h2 data-i18n="todayTasks">Today's tasks</h2><div id="todayTasks"></div><button class="link-button" data-go="tasks" data-i18n="manageTasks">Manage tasks</button></article>
+        <article class="card"><h2 data-i18n="calendar">Calendar</h2><p data-i18n="calendarPlaceholder">Google Calendar connection is prepared but not authorised. Use the link below meanwhile.</p><a class="button-link" href="https://calendar.google.com" target="_blank" rel="noopener">Open Google Calendar</a></article>
+      </div>
+    </section>
+
+    <section class="page" id="page-tasks">
+      <div class="page-head"><div><p class="eyebrow">Focus</p><h1 data-i18n="tasks">Tasks</h1></div><button id="clearCompleted" class="secondary" data-i18n="clearCompleted">Clear completed</button></div>
+      <form id="taskForm" class="task-form"><input id="taskTitle" required data-i18n-placeholder="newTask" placeholder="New task"><select id="taskArea"><option>Faith</option><option>Work</option><option>Health</option><option>Home</option><option>Finance</option><option>Learning</option><option>Relationships</option><option>Creative</option></select><input id="taskDate" type="date"><button data-i18n="add">Add</button></form>
+      <div class="filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="today">Today</button><button class="filter" data-filter="open">Open</button><button class="filter" data-filter="done">Done</button></div>
+      <div id="taskList" class="stack"></div>
+    </section>
+
+    <section class="page" id="page-prayer">
+      <div class="page-head"><div><p class="eyebrow">Liturgy of the Hours</p><h1 data-i18n="prayer">Prayer</h1></div></div>
+      <div class="tabs"><button class="prayer-tab active" data-prayer="morning" data-i18n="morningPrayer">Morning Prayer</button><button class="prayer-tab" data-prayer="evening" data-i18n="eveningPrayer">Evening Prayer</button><button class="prayer-tab" data-prayer="night" data-i18n="nightPrayer">Night Prayer</button></div>
+      <article class="card prayer-card"><h2 id="prayerTitle">Night Prayer</h2><p data-i18n="prayerNotice">This page provides a prayerful structure and links to authorised liturgical texts. It does not reproduce copyrighted editions without permission.</p><ol id="prayerOrder"></ol><div class="actions"><a class="button-link" href="https://universalis.com/" target="_blank" rel="noopener">Universalis</a><a class="button-link secondary-link" href="https://www.vatican.va/content/vatican/en.html" target="_blank" rel="noopener">Vatican</a></div></article>
+    </section>
+
+    <section class="page" id="page-readings"><div class="page-head"><div><p class="eyebrow">Word</p><h1 data-i18n="massReadings">Today's Mass readings</h1></div></div><article class="card"><p data-i18n="readingsNotice">Open today’s readings from an authorised Catholic source. A future approved connector can cache references for offline use.</p><div class="actions"><a class="button-link" href="https://universalis.com/mass.htm" target="_blank" rel="noopener">Universalis Mass</a><a class="button-link secondary-link" href="https://bible.usccb.org/daily-bible-reading" target="_blank" rel="noopener">USCCB readings</a></div></article></section>
+
+    <section class="page" id="page-journal"><div class="page-head"><div><p class="eyebrow">Reflect</p><h1 data-i18n="journal">Guided journal</h1></div><button id="exportJournal" class="secondary" data-i18n="export">Export</button></div><article class="card"><label data-i18n="gratitude">What am I grateful for?</label><textarea id="journalGratitude" rows="3"></textarea><label data-i18n="notice">What needs honest attention?</label><textarea id="journalAttention" rows="3"></textarea><label data-i18n="grace">Where did I notice grace?</label><textarea id="journalGrace" rows="3"></textarea><label data-i18n="tomorrow">What is enough for tomorrow?</label><textarea id="journalTomorrow" rows="3"></textarea><button id="saveJournal" data-i18n="saveJournal">Save journal locally</button><p class="muted" data-i18n="driveGate">Saving directly to Google Docs requires a separately approved Google OAuth connection. Export creates a file you can place in Drive now.</p></article></section>
+
+    <section class="page" id="page-education"><div class="page-head"><div><p class="eyebrow">Learn</p><h1 data-i18n="education">Education studio</h1></div></div><div class="grid three"><article class="card"><h2>Faith foundations</h2><p>Guided Catechism reading, Scripture, saints, councils and Catholic social teaching.</p></article><article class="card"><h2>Spanish camino</h2><p>A daily bilingual phrase, prayer vocabulary and a spaced-repetition review queue.</p><button id="newSpanish" class="secondary">New phrase</button><p id="spanishPhrase"></p></article><article class="card"><h2>Civic literacy</h2><p>Understand UK institutions, public services, local government, media literacy and global affairs.</p></article><article class="card"><h2>Digital craft</h2><p>Web accessibility, privacy, security, Git, design and humane automation.</p></article><article class="card"><h2>Great conversation</h2><p>Build a personal curriculum across theology, history, literature, art, science and economics.</p></article><article class="card"><h2>Teach back</h2><p>After learning, write a three-sentence explanation for a curious beginner.</p></article></div></section>
+
+    <section class="page" id="page-news"><div class="page-head"><div><p class="eyebrow">Discern</p><h1 data-i18n="newsDesk">Global news desk</h1></div></div><div id="newsGrid" class="grid three"></div><p class="muted" data-i18n="newsNote">Links open the publishers directly. Catholix should later add user-controlled RSS, source balance and reading limits rather than an addictive infinite feed.</p></section>
+
+    <section class="page" id="page-library"><div class="page-head"><div><p class="eyebrow">Church sources</p><h1 data-i18n="library">Catholic library</h1></div></div><div class="grid two"><a class="card link-card" href="https://www.vatican.va/archive/ENG0015/_INDEX.HTM" target="_blank" rel="noopener"><h2>Catechism of the Catholic Church</h2><p>Official Vatican English text</p></a><a class="card link-card" href="https://www.vatican.va/archive/bible/index.htm" target="_blank" rel="noopener"><h2>Holy Bible</h2><p>Vatican archive</p></a><a class="card link-card" href="https://www.vatican.va/content/vatican/en.html" target="_blank" rel="noopener"><h2>The Holy See</h2><p>Documents, audiences and teaching</p></a><a class="card link-card" href="https://www.vatican.va/content/francesco/en.html" target="_blank" rel="noopener"><h2>Papal teaching</h2><p>Official texts and addresses</p></a></div></section>
+
+    <section class="page" id="page-home"><div class="page-head"><div><p class="eyebrow">Steward</p><h1 data-i18n="homeGarden">Home, recipes & garden</h1></div></div><div class="grid three"><article class="card"><h2 data-i18n="recipes">Recipes</h2><p>Build a seasonal, affordable recipe box with favourites, ingredients and notes.</p><button class="secondary capture-list" data-list="recipes">Add recipe note</button></article><article class="card"><h2 data-i18n="garden">Garden</h2><p>Track sowing, planting, watering, harvests, wildlife and monthly jobs.</p><button class="secondary capture-list" data-list="garden">Add garden note</button></article><article class="card"><h2>Household</h2><p>Maintenance, cleaning rhythms, inventories, documents and useful contacts.</p><button class="secondary capture-list" data-list="household">Add household note</button></article></div><div id="homeNotes" class="stack"></div></section>
+
+    <section class="page" id="page-finance"><div class="page-head"><div><p class="eyebrow">Prudence</p><h1 data-i18n="finance">Finance</h1></div></div><div class="grid three"><article class="card"><h2>Monthly plan</h2><label>Income (£)<input id="income" type="number" min="0" step="0.01"></label><label>Essential costs (£)<input id="essentials" type="number" min="0" step="0.01"></label><label>Other planned costs (£)<input id="otherCosts" type="number" min="0" step="0.01"></label><button id="calculateBudget">Calculate</button><p id="budgetResult"></p></article><article class="card"><h2>Money review</h2><p>What needs attention, what can wait, and what one action would reduce risk?</p><textarea id="financeNote" rows="6"></textarea><button id="saveFinance" class="secondary">Save note</button></article><article class="card"><h2>Principles</h2><p>Protect essentials, avoid shame, prefer clarity, document decisions, and stop when the review is enough.</p></article></div></section>
+
+    <section class="page" id="page-commonplace"><div class="page-head"><div><p class="eyebrow">Remember</p><h1 data-i18n="commonplace">Commonplace book</h1></div></div><form id="commonplaceForm" class="card"><input id="commonplaceTitle" required placeholder="Title or source"><textarea id="commonplaceText" required rows="5" placeholder="Quotation, idea, observation or connection"></textarea><input id="commonplaceTags" placeholder="Tags, comma separated"><button>Add entry</button></form><div id="commonplaceList" class="stack"></div></section>
+
+    <section class="page" id="page-media"><div class="page-head"><div><p class="eyebrow">Attend</p><h1 data-i18n="mediaLists">Reading, watch & podcast lists</h1></div></div><form id="mediaForm" class="task-form"><input id="mediaTitle" required placeholder="Title"><select id="mediaType"><option>Reading</option><option>Watch</option><option>Podcast</option></select><input id="mediaCreator" placeholder="Author / creator"><button>Add</button></form><div id="mediaList" class="stack"></div></section>
+
+    <section class="page" id="page-connections"><div class="page-head"><div><p class="eyebrow">Connect</p><h1 data-i18n="googleTools">Google tools</h1></div></div><div class="grid three"><a class="card link-card" href="https://mail.google.com" target="_blank" rel="noopener"><h2>Gmail</h2><p>Communication and actionable correspondence</p></a><a class="card link-card" href="https://calendar.google.com" target="_blank" rel="noopener"><h2>Google Calendar</h2><p>Fixed commitments and day classification</p></a><a class="card link-card" href="https://drive.google.com" target="_blank" rel="noopener"><h2>Google Drive</h2><p>Plan A and controlled records</p></a><a class="card link-card" href="https://tasks.google.com" target="_blank" rel="noopener"><h2>Google Tasks</h2><p>Simple action lists</p></a><article class="card"><h2>Connection status</h2><p class="status-line"><span class="dot"></span>Local-only prototype</p><p>OAuth scopes, data boundaries, write-back rules and audit records must be approved before connection.</p></article></div></section>
+
+    <section class="page" id="page-settings"><div class="page-head"><div><p class="eyebrow">Control</p><h1 data-i18n="settings">Settings</h1></div></div><article class="card"><label><input id="reducedMotion" type="checkbox"> Reduce motion</label><label><input id="largeText" type="checkbox"> Larger text</label><button id="exportAll" class="secondary">Export all local data</button><button id="clearAll" class="danger">Clear all local data</button><p class="muted">This prototype stores personal entries only in this browser. No data is sent to Catholix or Google.</p></article></section>
+  </main>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="assets/filofax.js" defer></script>
+</body>
+</html>
